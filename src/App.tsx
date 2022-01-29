@@ -3,6 +3,8 @@ import './styles/App.css'
 import PostList, {PostType} from "./components/PostList";
 import PostForm from "./components/PostForm";
 import PostFilter from "./components/PostFilter";
+import MyModal from "./components/UI/Modal/MyModal";
+import MyButton from "./components/UI/Button/MyButton";
 
 function App() {
     const [posts, setPosts] = useState<Array<PostType>>([
@@ -11,6 +13,7 @@ function App() {
         {id: 3, title: 'Redux', body: 'Redux'}
     ])
     const [filter, setFilter] = useState({sort: '', query: ''})
+    const [modal, setModal] = useState(false)
 
     const sortedPosts = useMemo(() => {
         if (filter.sort) {
@@ -25,6 +28,7 @@ function App() {
 
     const createPost = (newPost: PostType) => {
         setPosts([...posts, newPost])
+        setModal(false)
     }
 
     const deletePost = (post: PostType) => {
@@ -33,10 +37,15 @@ function App() {
 
     return (
         <div className="App">
-            <PostForm create={createPost}/>
+            <MyButton style={{marginTop: '30px'}} onClick={() => setModal(true)}>
+                Add Post
+            </MyButton>
+            <MyModal visible={modal} setVisible={setModal}>
+                <PostForm create={createPost}/>
+            </MyModal>
             <hr style={{margin: '15px 0'}}/>
             <PostFilter filter={filter} setFilter={setFilter}/>
-            <PostList posts={sortedAddSearchedPosts} title={'Posts list 1'} deletePost={deletePost}/>
+            <PostList posts={sortedAddSearchedPosts} title={'Posts about JS'} deletePost={deletePost}/>
         </div>
     );
 }

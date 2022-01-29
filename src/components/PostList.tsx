@@ -15,6 +15,14 @@ type PropsType = {
 
 const PostList: FC<PropsType> = ({posts, title, deletePost}) => {
 
+    if (!posts.length) {
+        return (
+            <h1 style={{textAlign: "center"}}>
+                Posts not found!
+            </h1>
+        )
+    }
+
     return (
         <div>
             <h1 style={{textAlign: "center"}}>{title}</h1>

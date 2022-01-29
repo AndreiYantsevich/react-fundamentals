@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
 import PostItem from "./PostItem";
 
-type PostType = {
-    id: number
+export type PostType = {
+    id: number | null
     title: string
     body: string
 }
@@ -10,7 +10,7 @@ type PostType = {
 type PropsType = {
     posts: Array<PostType>
     title: string
-    deletePost: (id: number) => void
+    deletePost: (post: PostType) => void
 }
 
 const PostList: FC<PropsType> = ({posts, title, deletePost}) => {

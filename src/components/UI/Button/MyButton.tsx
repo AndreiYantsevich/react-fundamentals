@@ -1,20 +1,17 @@
-import React, {MouseEvent, FC} from 'react';
+import React, {FC, MouseEvent, ReactNode} from 'react';
 import styles from './MyButton.module.css'
+import {PostType} from "../../PostList";
 
 type PropsType = {
-    addPost: (title: string, description: string) => void
-    title: string
-    description: string
+    onClick: (e: MouseEvent<HTMLButtonElement>) => void
+    post?: PostType
+    children: ReactNode
 }
 
-const MyButton: FC<PropsType> = ({children, addPost, title, description}) => {
-    const addNewPost = (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault()
-        addPost(title, description)
-    }
+const MyButton: FC<PropsType> = ({children,...props}) => {
 
     return (
-        <button className={styles.myBtn} onClick={addNewPost}>
+        <button {...props} className={styles.myBtn}>
             {children}
         </button>
     );

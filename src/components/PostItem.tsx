@@ -1,13 +1,10 @@
 import React, {FC} from 'react';
+import MyButton from "./UI/Button/MyButton";
+import {PostType} from "./PostList";
 
 type PropsType = {
-    post: {
-        id: number
-        title: string
-        body: string
-    }
-    deletePost: (id: number) => void
-
+    post: PostType
+    deletePost: (post: PostType) => void
 }
 
 const PostItem: FC<PropsType> = ({post, deletePost}) => {
@@ -21,7 +18,7 @@ const PostItem: FC<PropsType> = ({post, deletePost}) => {
                 </div>
             </div>
             <div className="post__btns">
-                <button onClick={() => deletePost(post.id)}>Delete</button>
+                <MyButton onClick={() =>deletePost(post)}>Delete</MyButton>
             </div>
         </div>
     );

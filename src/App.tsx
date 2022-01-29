@@ -1,30 +1,17 @@
-import React, {useMemo, useState} from 'react';
+import React, {useState} from 'react';
 import './styles/App.css'
 import PostList, {PostType} from "./components/PostList";
 import PostForm from "./components/PostForm";
 import PostFilter from "./components/PostFilter";
 import MyModal from "./components/UI/Modal/MyModal";
 import MyButton from "./components/UI/Button/MyButton";
+import {usePosts} from "./hooks/usePosts";
 
 function App() {
-    const [posts, setPosts] = useState<Array<PostType>>([
-        {id: 1, title: 'Javascript', body: 'JS'},
-        {id: 2, title: 'React', body: 'React'},
-        {id: 3, title: 'Redux', body: 'Redux'}
-    ])
+    const [posts, setPosts] = useState<Array<PostType>>([])
     const [filter, setFilter] = useState({sort: '', query: ''})
     const [modal, setModal] = useState(false)
-
-    const sortedPosts = useMemo(() => {
-        if (filter.sort) {
-            return [...posts].sort((a: { [index: string]: any } = {}, b: { [index: string]: any } = {}) => a[filter.sort].localeCompare(b[filter.sort]))
-        }
-        return posts;
-    }, [filter.sort, posts])
-
-    const sortedAddSearchedPosts = useMemo(() => {
-        return sortedPosts.filter(post => post.title.toLowerCase().includes(filter.query.toLowerCase()))
-    }, [filter.query, sortedPosts])
+    const sortedAddSearchedPosts = usePosts(posts, filter.sort, filter.query)
 
     const createPost = (newPost: PostType) => {
         setPosts([...posts, newPost])

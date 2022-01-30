@@ -10,7 +10,6 @@ type PropsType = {
 
 const PostItem: FC<PropsType> = ({post, deletePost}) => {
     const router = useNavigate()
-    console.log(router)
     return (
         <div className="post">
             <div className="post__content">

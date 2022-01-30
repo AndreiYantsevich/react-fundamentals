@@ -1,15 +1,15 @@
-import React, {FC} from 'react';
+import React, {ChangeEvent, FC} from 'react';
 
 export type OptionType = {
-    value: string
+    value: string | number
     name: string
 }
 
 type PropsType = {
     options: Array<OptionType>
     defaultValue: string
-    value: string
-    onChange: (sort: string) => void
+    value: string | number
+    onChange: (value: any) => void
 }
 
 const MySelect: FC<PropsType> = ({options, defaultValue, value, onChange}) => {

@@ -3,7 +3,7 @@ import styles from './MyButton.module.css'
 import {PostType} from "../../PostList";
 
 type PropsType = {
-    onClick: (e: MouseEvent<HTMLButtonElement>) => void
+    onClick?: (e: MouseEvent<HTMLButtonElement>) => void
     post?: PostType
     style?: {}
 }
